@@ -13,6 +13,8 @@ router.route("/add").post((req,res) => {
     const gender = req.body.gender;
     const address = req.body.address;
 
+    
+
     const  newStudent = new  Student({
         name ,
         age,
@@ -33,6 +35,7 @@ router.route("/add").post((req,res) => {
 
 //get mothod
 //json format
+//http://localhost:8070/student
 router.route("/").get((req,res)=>{
     //uda hada gaththa student
     Student.find().then((students)=>{
@@ -84,11 +87,12 @@ router.route("/delete/:id").delete(async (req,res) => {
 })
 
 //fetch one user
+//http//localhost:8070/student/get/
 router.route("/get/:id").get(async (req,res) => {
     let userId = req.params.id;
     const user = await Student.findById(userId)
     .then((student)=>{
-        res.status(200).send({status:"User feched",user:student})
+        res.status(200).send({status:"User fetched",user:student})
     }).catch(() => {
         console.log(err.message);
         res.status(500).send({status:"error with get user",error:err.message});
